@@ -1,0 +1,6 @@
+name = "proconio"
+version = "0.1.0"
+defaultTargets = ["Proconio"]
+
+[[lean_lib]]
+name = "Proconio"
