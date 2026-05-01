@@ -29,3 +29,11 @@ instance [Readable α β] : Readable (Vector α n) (Vector β n) where
   read source :=
     Vector.ofFnM (fun _ => (Readable.read α source))
 
+instance [Readable α α] (p : α → Prop) [∀ x, Decidable (p x)] : Readable (Subtype p) (Subtype p) where
+  read source := do
+    let x ← Readable.read α source
+    if h : p x then
+      pure ⟨x, h⟩
+    else
+      throw <| IO.userError s!"Did not satisfy subtype requirement"
+
