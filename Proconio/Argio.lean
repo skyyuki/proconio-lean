@@ -35,7 +35,7 @@ meta def elabArgioE : TermElab := fun stx _ => do
     for arg in args do
       let argType ← inferType arg
 
-      let innerType := if argType.isAppOf `Arg then argType.getAppArgs[1]! else argType
+      let innerType := if argType.isAppOf ``Arg then argType.getAppArgs[1]! else argType
 
       let inst ← synthInstance (mkAppN (mkConst ``Readable) #[innerType, (← mkFreshExprMVar none)])
 
