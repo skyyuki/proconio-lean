@@ -1,5 +1,10 @@
-import Proconio.Basic
+module
 
+public import Proconio.Basic
+
+
+public section
+namespace Proconio
 
 class FromString (α : Type) where
   parse : String.Slice → Option α

@@ -1,12 +1,18 @@
-import Lean
+module
 
-import Proconio.Basic
+meta import Lean.Meta
+public import Lean.Elab.Term
 
+public import Proconio.Core
+
+
+public section
+namespace Proconio
 
 open Lean Meta Elab Term
 
 
-@[reducible]
+@[reducible, expose]
 def Arg (α : Type) [Readable α β] := β
 instance (priority := 900) [Readable α β] : Readable (Arg α) β where
   read source := Readable.read α source
@@ -15,7 +21,7 @@ instance (priority := 900) [Readable α β] : Readable (Arg α) β where
 syntax (name := argioE) "argio!" term "from" term : term
 
 @[term_elab argioE]
-def elabArgioE : TermElab := fun stx _ => do
+meta def elabArgioE : TermElab := fun stx _ => do
   let `(argio! $fn from $source) := stx | throwUnsupportedSyntax
 
   let fn ← elabTerm fn none

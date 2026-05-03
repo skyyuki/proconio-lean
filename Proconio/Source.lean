@@ -1,5 +1,10 @@
-import Proconio.Basic
+module
 
+public import Proconio.Basic
+
+
+public section
+namespace Proconio
 
 structure OnceSource where
   tokens : IO.Ref (List String.Slice)

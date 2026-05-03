@@ -1,3 +1,8 @@
+module
+
+public section
+namespace Proconio
+
 class Source (σ : Type) where
   nextToken : σ → IO String.Slice
   isEmpty : σ → IO Bool

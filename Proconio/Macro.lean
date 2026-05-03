@@ -1,7 +1,12 @@
-import Lean
+module
 
-import Proconio.Basic
+meta import Lean.Parser
 
+public import Proconio.Core
+
+
+public section
+namespace Proconio
 
 open Lean.Parser.Term
 
