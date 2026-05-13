@@ -36,7 +36,7 @@ meta def elabArgioE : TermElab := fun stx _ => do
   let fnType ← inferType fn
   let source ← elabTerm source none
 
-  forallTelescope fnType fun args _ => do
+  forallTelescope fnType fun args res => do
     let mut currentExpr := fn
     let mut argActions : Array (Expr × Expr) := #[] -- (arg, readAction)
 
@@ -54,6 +54,10 @@ meta def elabArgioE : TermElab := fun stx _ => do
 
       currentExpr := mkApp currentExpr arg
       argActions := argActions.push (arg, readAction)
+
+    -- If fn's result is not IO, make it to be IO function by apply pure.
+    if !(← isDefEq res <| mkApp (mkConst ``IO) (← mkFreshExprMVar none)) then
+      currentExpr ← mkAppOptM ``pure #[(mkConst ``IO), none, none, currentExpr]
 
     for (arg, readAction) in argActions.reverse do
       currentExpr ← mkAppOptM
