@@ -7,10 +7,11 @@ public import Proconio.Readable
 public section
 namespace Proconio
 
+inductive FromFunc (α : Type) {β γ : Type} [Readable α β] (f : β → γ) : Type 
+instance {α β γ : Type} [Readable α β] {f : β → γ} : Readable (FromFunc α f) γ where
+  read source := Readable.read α source <&> f
+
 /--
 For 1-indexed index input, interpreted as Nat - 1.
 -/
-opaque Nat_1 : Type := Nat
-instance : Readable Nat_1 Nat where
-  read source := Readable.read Nat source <&> (· - 1)
-
+abbrev Nat_1 : Type := FromFunc Nat (· - 1)
