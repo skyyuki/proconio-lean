@@ -8,7 +8,6 @@ A class that white space seperated token stream wrapping stdin or else.
 -/
 class Source (σ : Type) where
   nextToken : σ → IO String.Slice
-  isEmpty : σ → IO Bool
 
 
 /--

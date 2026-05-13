@@ -19,8 +19,6 @@ instance : Source OnceSource where
     | s :: ss =>
       src.tokens.set ss
       return s
-  isEmpty src := do
-    src.tokens.get <&> List.isEmpty
 
 def OnceSource.ofString (s : String) : IO OnceSource := do
   let tokens := s.split Char.isWhitespace |>.filter (!·.isEmpty) |>.toList
