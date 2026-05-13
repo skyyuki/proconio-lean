@@ -18,8 +18,6 @@ Can be used in a definition of arguments on a function without the compiler conf
 -/
 @[reducible, expose]
 def Arg (α : Type) [Readable α β] := β
-instance (priority := 900) [Readable α β] : Readable (Arg α) β where
-  read source := Readable.read α source
 
 
 /--
