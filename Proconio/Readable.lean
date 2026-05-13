@@ -6,9 +6,11 @@ public import Proconio.Basic
 public section
 namespace Proconio
 
+/--
+Represent the way to parse a value.
+-/
 class FromString (α : Type) where
   parse : String.Slice → Option α
-
 
 instance : FromString String where
   parse := some ∘ String.Slice.toString
@@ -26,6 +28,7 @@ instance [FromString α] : Readable α α where
     | some val => pure val
     | none     => throw <| IO.userError s!"failed to parse from '{token}'"
 
+/- Readable instance definitions -/
 instance [Readable α₁ β₁] [Readable α₂ β₂] : Readable (α₁ × α₂) (β₁ × β₂) where
   read source := do
     pure (Prod.mk (← Readable.read α₁ source) (← Readable.read α₂ source))

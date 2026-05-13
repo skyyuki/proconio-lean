@@ -6,6 +6,9 @@ public import Proconio.Basic
 public section
 namespace Proconio
 
+/--
+The source that initially reads all the text into a buffer.
+-/
 structure OnceSource where
   tokens : IO.Ref (List String.Slice)
 

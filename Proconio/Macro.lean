@@ -10,9 +10,25 @@ namespace Proconio
 
 open Lean.Parser.Term
 
+/--
+Read input a value of type from specified source.
+```lean
+let v ← read_value! type from source
+```
+-/
 macro "read_value!" ty:term "from" source:term : doElem => do
   `(doElem| Readable.read $ty $source)
 
+/--
+Read input and define variable from specified source.
+```lean
+input! {
+  from source,
+  v: type,
+  u: type,
+}
+```
+-/
 syntax "input!" "{" "from" term "," (ident ":" term),* "}" doSeq : doElem
 
 macro_rules
