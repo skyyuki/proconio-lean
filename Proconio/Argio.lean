@@ -14,7 +14,8 @@ open Lean Meta Elab Term
 
 /--
 The marker to specify a marker that interpreted as an other type in `argio!` macro.
-Can be used in a definition of arguments on a function without the compiler confusing a type as a marker type but a real type in the body of the function.
+Can be used in a definition of arguments on a function without the compiler confusing a type as
+a marker type but a real type in the body of the function.
 -/
 @[reducible, expose]
 def Arg (α : Type) [Readable α β] := β
@@ -67,3 +68,4 @@ meta def elabArgioE : TermElab := fun stx _ => do
 
     return currentExpr
 
+end Proconio

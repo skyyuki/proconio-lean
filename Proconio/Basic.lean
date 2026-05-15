@@ -17,3 +17,4 @@ A class that represent how to make a value from token stream.
 class Readable (α : Type) (β : outParam Type) where
   read [Source σ] : (source : σ) → IO β
 
+end Proconio

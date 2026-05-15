@@ -26,7 +26,7 @@ instance [FromString α] : Readable α α where
     let token ← Source.nextToken source
     match FromString.parse token with
     | some val => pure val
-    | none     => throw <| IO.userError s!"failed to parse from '{token}'"
+    | none => throw <| IO.userError s!"failed to parse from '{token}'"
 
 /- Readable instance definitions -/
 instance [Readable α₁ β₁] [Readable α₂ β₂] : Readable (α₁ × α₂) (β₁ × β₂) where
@@ -37,7 +37,8 @@ instance [Readable α β] : Readable (Vector α n) (Vector β n) where
   read source :=
     Vector.ofFnM (fun _ => (Readable.read α source))
 
-instance [Readable α α] (p : α → Prop) [∀ x, Decidable (p x)] : Readable (Subtype p) (Subtype p) where
+instance [Readable α α] (p : α → Prop) [∀ x, Decidable (p x)]
+    : Readable (Subtype p) (Subtype p) where
   read source := do
     let x ← Readable.read α source
     if h : p x then
@@ -45,3 +46,4 @@ instance [Readable α α] (p : α → Prop) [∀ x, Decidable (p x)] : Readable 
     else
       throw <| IO.userError s!"Did not satisfy subtype requirement"
 
+end Proconio

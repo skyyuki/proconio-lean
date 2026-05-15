@@ -5,7 +5,6 @@ open Proconio
 
 def main : IO Unit := do
   let source ← OnceSource.ofStdin
-
   
   let n ← source.read Nat
   let m ← source.read Nat

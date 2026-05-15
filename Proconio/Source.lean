@@ -58,7 +58,7 @@ instance : Source LineSource where
       return s
   
 def LineSource.ofStream (stream : IO.FS.Stream) : IO LineSource := do
-  pure { stream := stream, line_tokens := ← IO.mkRef []}
+  pure { stream := stream, line_tokens := ← IO.mkRef [] }
   
 def LineSource.ofStdio : IO LineSource := do
   let stdin ← IO.getStdin
@@ -67,3 +67,4 @@ def LineSource.ofStdio : IO LineSource := do
 def LineSource.read (source : LineSource) (α : Type) [Readable α β] : IO β :=
   Readable.read α source
 
+end Proconio

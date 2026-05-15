@@ -3,7 +3,8 @@ import Proconio.Argio
 
 open Proconio
 
-def solve (n m : Nat) (s : String) (p : Int × Int) (v : Vector Int 3) (vn : Nat) (vd : Vector Int vn) (n1 : Arg Nat_1) : IO Unit := do
+def solve (n m : Nat) (s : String) (p : Int × Int) (v : Vector Int 3)
+    (vn : Nat) (vd : Vector Int vn) (n1 : Arg Nat_1) : IO Unit := do
   IO.println s!"n: {n}, m: {m}"
   IO.println s!"s: {s}"
   IO.println s!"x: {p}"

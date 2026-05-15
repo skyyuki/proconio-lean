@@ -27,3 +27,5 @@ abbrev Bytes : Type := FromFunc String String.toByteArray
 String into `List UInt8`
 -/
 abbrev BytesList : Type := FromFunc Bytes ByteArray.toList
+
+end Proconio
